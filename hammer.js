@@ -1,4 +1,4 @@
-/*! Hammer.JS - v1.0.6 - 2014-01-02
+/*! Hammer.JS - v1.0.6 - 2014-01-15
  * http://eightmedia.github.com/hammer.js
  *
  * Copyright (c) 2014 Jorik Tangelder <j.tangelder@gmail.com>;
@@ -1261,7 +1261,7 @@ Hammer.gestures.Touch = {
       return;
     }
 
-    if(inst.options.prevent_default) {
+    if(inst.options.prevent_default && (ev.target === inst.element)) {
       ev.preventDefault();
     }
 
@@ -1375,4 +1375,4 @@ Hammer.gestures.Transform = {
   else {
     window.Hammer = Hammer;
   }
-})(this);
+})(window);

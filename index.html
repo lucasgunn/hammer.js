@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hammer Swipe Test</title>
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<style type="text/css" id="loadingStyles">
+	<style type="text/css">
+		body { padding:0; margin:0;  }
+		#swipeme { width:90%; height:160px; border-radius: 5pt; background:#F07; padding:10pt 5%; }
+		#swipeme a { display: inline-block; padding:5pt; background:#000; color:#FFF; border-radius:5pt; }
+		input { font-size:16pt; margin:10pt 0; width: 97%; display: block; padding:5pt 1%; }
+		#output { font-size:12pt; padding:5pt; border:1pt solid #CCC; height:10em; }
+	</style>
+	<script src="./hammer.js" type="text/javascript"></script>
+</head>
+<body>
+	<pre id="output">Output here</pre>
+	<div id="swipeme">
+		<input type="text" value="" placeholder="Type something, I dare you..." />
+		<button>Imma native event button</button>
+		<a>Imma a Hammer tap link</a>
+	</div>
+	<script type="text/javascript">
+		var dom = document.getElementById('swipeme'), 
+			div = Hammer(dom, { prevent_default:true }),
+			pre = document.getElementById('output'),
+			input = dom.getElementsByTagName('input')[0],
+			button = dom.getElementsByTagName('button')[0],
+			a = Hammer(dom.getElementsByTagName('a')[0], { prevent_default:true }),
+			body = document.body;
+
+		input.addEventListener('input', function(ev) {
+			console.log(this.value);
+		}, false);
+
+		button.addEventListener('click', function(ev) {
+			alert('Imma button yo!');
+		}, false);
+
+		a.on('tap', function() {
+			alert('Hammer button yo...');
+		});
+
+		div.on('drag', function(ev) {
+			var gest = ev.gesture,
+				text = [];
+
+			text.push('Drag direction: ' + gest.direction);
+			text.push('Drag distance:  ' + Math.round(gest.distance));
+			text.push('Drag deltaX:    ' + Math.round(gest.deltaX));
+			text.push('Drag deltaY:    ' + Math.round(gest.deltaY));
+			text.push('Drag velocityX: ' + Math.round(gest.velocityX));
+			text.push('Drag velocityY: ' + Math.round(gest.velocityY));
+
+			pre.innerText = text.join("\n");
+		});
+
+		div.on('swipeleft', function(ev) {
+			var gest = ev.gesture,
+				text = [];
+
+			text.push('IS SWIPE');
+			text.push('Drag direction: ' + gest.direction);
+			text.push('Drag distance:  ' + Math.round(gest.distance));
+			text.push('Drag deltaX:    ' + Math.round(gest.deltaX));
+			text.push('Drag deltaY:    ' + Math.round(gest.deltaY));
+			text.push('Drag velocityX: ' + Math.round(gest.velocityX));
+			text.push('Drag velocityY: ' + Math.round(gest.velocityY));
+
+			pre.innerText = text.join("\n");
+		});
+
+	</script>
+</body>
+</html>
