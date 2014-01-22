@@ -29,6 +29,10 @@
 			a = Hammer(dom.getElementsByTagName('a')[0], { prevent_default:true }),
 			body = document.body;
 
+		input.addEventListener('touchstart', function(ev) {
+			ev.stopPropagation();
+		}, false);
+
 		input.addEventListener('input', function(ev) {
 			console.log(this.value);
 		}, false);
@@ -40,6 +44,16 @@
 		a.on('tap', function() {
 			alert('Hammer button yo...');
 		});
+
+		dom.addEventListener('touchmove', function(ev) {
+			var touch = ev.touches[0];
+			console.log([touch.pageX, touch.pageY]);
+			ev.preventDefault();
+		}, false);
+
+		dom.addEventListener('touchstart', function(ev) {
+			ev.preventDefault();
+		}, false);
 
 		div.on('drag', function(ev) {
 			var gest = ev.gesture,

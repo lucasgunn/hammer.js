@@ -1,4 +1,4 @@
-/*! Hammer.JS - v1.0.6 - 2014-01-15
+/*! Hammer.JS - v1.0.6 - 2014-01-22
  * http://eightmedia.github.com/hammer.js
  *
  * Copyright (c) 2014 Jorik Tangelder <j.tangelder@gmail.com>;
@@ -1261,7 +1261,7 @@ Hammer.gestures.Touch = {
       return;
     }
 
-    if(inst.options.prevent_default && (ev.target === inst.element)) {
+    if(inst.options.prevent_default) {
       ev.preventDefault();
     }
 
